@@ -1,0 +1,8 @@
+services:
+  bank-mysql:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mybank
+    ports:
+      - "8889:3306"
