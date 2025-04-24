@@ -27,7 +27,7 @@ docker network create symfony-network
 
 If needed deploy a myslq container
 ```
-docker run --name symfony-mysql --network symfony-network -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root mysql
+docker run --name symfony-mysql --network bank-network -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root mysql
 ```
 
 Change the connection string in the .env line 27 with the container name of mysql container
