@@ -1,8 +1,22 @@
+# services:
+#   bank-mysql:
+#     image: mysql
+#     environment:
+#       MYSQL_ROOT_PASSWORD: root
+#       MYSQL_DATABASE: mybank
+#     ports:
+#       - "8889:3306"
+
+
 services:
   bank-mysql:
-    image: mysql
+    image: mysql:8.0           # краще за default latest
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: mybank
     ports:
-      - "8889:3306"
+      - "3306:3306"            # тепер MySQL доступний на 127.0.0.1:3306
+    volumes:
+      - dbdata:/var/lib/mysql  # щоб дані не губилися
+volumes:
+  dbdata:

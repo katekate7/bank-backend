@@ -11,7 +11,7 @@ class CategoryFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $names = ['Housing', 'Transportation', 'Food', 'Utilities', 
-        'Healthсare', 'Insurance', 'Entertainment', 'Shopping', 'Education', 'Debt Payments', 'Other'];
+        'Healthcare', 'Insurance', 'Entertainment', 'Shopping', 'Education', 'Debt Payments', 'Other'];
 
         foreach ($names as $name) {
             $category = new Category();

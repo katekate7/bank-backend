@@ -27,7 +27,7 @@ final class Version20250422133749 extends AbstractMigration
             DROP INDEX IDX_2D3A8DA623AE877F ON expense
         SQL);
         $this->addSql(<<<'SQL'
-            ALTER TABLE expense CHANGE catedory_id category_id INT NOT NULL
+            ALTER TABLE expense CHANGE category_id category_id INT NOT NULL
         SQL);
         $this->addSql(<<<'SQL'
             ALTER TABLE expense ADD CONSTRAINT FK_2D3A8DA612469DE2 FOREIGN KEY (category_id) REFERENCES category (id)
@@ -47,13 +47,13 @@ final class Version20250422133749 extends AbstractMigration
             DROP INDEX IDX_2D3A8DA612469DE2 ON expense
         SQL);
         $this->addSql(<<<'SQL'
-            ALTER TABLE expense CHANGE category_id catedory_id INT NOT NULL
+            ALTER TABLE expense CHANGE category_id category_id INT NOT NULL
         SQL);
         $this->addSql(<<<'SQL'
-            ALTER TABLE expense ADD CONSTRAINT FK_2D3A8DA623AE877F FOREIGN KEY (catedory_id) REFERENCES category (id) ON UPDATE NO ACTION ON DELETE NO ACTION
+            ALTER TABLE expense ADD CONSTRAINT FK_2D3A8DA623AE877F FOREIGN KEY (category_id) REFERENCES category (id) ON UPDATE NO ACTION ON DELETE NO ACTION
         SQL);
         $this->addSql(<<<'SQL'
-            CREATE INDEX IDX_2D3A8DA623AE877F ON expense (catedory_id)
+            CREATE INDEX IDX_2D3A8DA623AE877F ON expense (category_id)
         SQL);
     }
 }
