@@ -24,6 +24,8 @@ security:
             custom_authenticator: App\Security\LoginAuthenticator
             entry_point: App\Security\LoginAuthenticator   # <-- ВАЖЛИВО
 
+            stateless: false
+
             logout:
                 path:   app_logout
                 target: app_login
@@ -36,4 +38,5 @@ security:
     access_control:
         - { path: ^/login, roles: PUBLIC_ACCESS }
         - { path: ^/register, roles: PUBLIC_ACCESS }
+        - { path: ^/api, roles: ROLE_USER }
         - { path: ^/user/expense, roles: ROLE_USER }
