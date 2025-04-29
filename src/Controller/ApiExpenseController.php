@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\HttpFoundation\Response;
+
 
 #[Route('/api')]
 class ApiExpenseController extends AbstractController
@@ -73,4 +75,19 @@ class ApiExpenseController extends AbstractController
 
         return new JsonResponse($data, 200);
     }
+
+    #[Route('/expense/{id}', name: 'api_expense_delete', methods: ['DELETE'])]
+    public function delete(Expense $expense, EntityManagerInterface $em): JsonResponse
+    {
+        $user = $this->getUser();
+        if (!$user || $expense->getUser() !== $user) {
+            return new JsonResponse(['error' => 'Unauthorized'], 403);
+        }
+
+        $em->remove($expense);
+        $em->flush();
+
+        return new JsonResponse(['message' => 'Expense deleted'], 200);
+    }
+
 }
