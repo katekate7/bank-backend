@@ -20,9 +20,8 @@ class Expense
     #[ORM\Column(type: 'date_immutable')]
     private ?\DateTimeImmutable $date = null;
     
-
-    #[ORM\Column]
-    private ?float $amout = null;
+    #[ORM\Column(type: 'float')]
+    private $amount;
 
     #[ORM\ManyToOne(inversedBy: 'expenses')]
     #[ORM\JoinColumn(nullable: false)]
@@ -48,6 +47,17 @@ class Expense
 
         return $this;
     }
+    
+    public function getAmount(): ?float
+    {
+        return $this->amount;
+    }
+
+    public function setAmount(float $amount): self
+    {
+        $this->amount = $amount;
+        return $this;
+    }
 
     public function getDate(): ?\DateTimeImmutable
     {
@@ -57,18 +67,6 @@ class Expense
     public function setDate(\DateTimeImmutable $date): static
     {
         $this->date = $date;
-
-        return $this;
-    }
-
-    public function getAmout(): ?float
-    {
-        return $this->amout;
-    }
-
-    public function setAmout(float $amout): static
-    {
-        $this->amout = $amout;
 
         return $this;
     }

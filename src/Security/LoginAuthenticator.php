@@ -1,5 +1,4 @@
 <?php
-// src/Security/LoginAuthenticator.php
 namespace App\Security;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
