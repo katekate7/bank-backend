@@ -90,4 +90,40 @@ class ApiExpenseController extends AbstractController
         return new JsonResponse(['message' => 'Expense deleted'], 200);
     }
 
+    #[Route('/expense/{id}', name: 'api_expense_get', methods: ['GET'])]
+    public function getExpense(Expense $expense): JsonResponse
+    {
+        $user = $this->getUser();
+        if (!$user || $expense->getUser() !== $user) {
+            return new JsonResponse(['error' => 'Unauthorized'], 403);
+        }
+    
+        return $this->json($expense, 200, [], ['groups' => 'expense:read']);
+    }    
+
+    #[Route('/expense/{id}', name: 'api_expense_update', methods: ['PUT'])]
+    public function update(Request $request, Expense $expense, CategoryRepository $categoryRepository, EntityManagerInterface $em): JsonResponse
+    {
+        $user = $this->getUser();
+        if (!$user || $expense->getUser() !== $user) {
+            return new JsonResponse(['error' => 'Unauthorized'], 403);
+        }
+
+        $data = json_decode($request->getContent(), true);
+        $expense->setLabel($data['label'] ?? $expense->getLabel());
+        $expense->setAmount((float) ($data['amount'] ?? $expense->getAmount()));
+        $expense->setDate(!empty($data['date']) ? new \DateTimeImmutable($data['date']) : $expense->getDate());
+
+        if (!empty($data['category'])) {
+            $category = $categoryRepository->findOneBy(['name' => $data['category']]);
+            if ($category) {
+                $expense->setCategory($category);
+            }
+        }
+
+        $em->flush();
+
+        return new JsonResponse(['message' => 'Expense updated successfully'], 200);
+    }
+
 }
