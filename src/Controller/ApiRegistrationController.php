@@ -33,7 +33,7 @@ class ApiRegistrationController extends AbstractController
         $em->flush();
 
         return new JsonResponse([
-            'message' => '✅ Користувача створено',
+            'message' => '✅ Created successfully',
             'user' => $user->getUserIdentifier()
         ]);
     }

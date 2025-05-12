@@ -44,7 +44,6 @@ class LoginAuthenticator extends AbstractAuthenticator implements Authentication
         return new JsonResponse(['error' => '❌ Невірний email або пароль'], 401);
     }
 
-    // Ось цей метод потрібно реалізувати для entry_point
     public function start(Request $request, AuthenticationException $authException = null): Response
     {
         return new JsonResponse(['error' => 'Authentication Required'], 401);
